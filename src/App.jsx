@@ -1,115 +1,735 @@
-import { ArrowDown, ArrowRight, ArrowUpRight, BarChart3, Boxes, BriefcaseBusiness, Check, ChevronRight, Database, Download, Factory, GraduationCap, Mail, MapPin, Menu, PackageCheck, Phone, Settings2, Sparkles, Truck, X } from 'lucide-react';
-import { useState } from 'react';
 
-const skills = [
-  { title: 'Planning & Optimization', items: ['Demand forecasting', 'Inventory planning', 'Replenishment', 'Supply planning', 'S&OP', 'Scenario analysis', 'Procurement planning', 'Exception management'] },
-  { title: 'Systems & Analytics', items: ['SAP MM / SD / EWM', 'Manhattan WMS', 'SQL', 'Power BI', 'Tableau', 'Advanced Excel', 'Python', 'Predictive analytics'] },
-  { title: 'Operations Excellence', items: ['Warehouse operations', 'Order fulfillment', 'Vendor management', 'Root cause analysis', 'Lean & Kaizen', 'Process mapping', 'SOP development', 'Stakeholder management'] },
+import { useState, useEffect } from "react";
+import {
+  ArrowUpRight,
+  ArrowDown,
+  ArrowRight,
+  BarChart3,
+  Boxes,
+  CheckCircle2,
+  ChevronRight,
+  Database,
+  Github,
+  GraduationCap,
+  Layers3,
+  Mail,
+  MapPin,
+  Menu,
+  PackageCheck,
+  Phone,
+  Sparkles,
+  TrendingUp,
+  Truck,
+  X,
+} from "lucide-react";
+
+const profile = {
+  name: "Anuranjani Thota",
+  email: "anuranjani2209@gmail.com",
+  phone: "+1 (330) 554-2728",
+  github: "https://github.com/Anuranjani09",
+  location: "United States",
+};
+
+const metrics = [
+  { value: "3+", label: "Years of experience" },
+  { value: "8,000+", label: "SKUs analyzed" },
+  { value: "25K+", label: "Weekly order lines" },
+  { value: "20%", label: "Reporting effort reduced" },
 ];
 
 const experience = [
   {
-    company: 'Advantage Solutions', role: 'Supply Chain Analyst', location: 'USA', dates: 'Jan 2025 — Present', current: true,
-    intro: 'Making inventory availability and fulfillment performance easier to see, understand, and improve.',
-    points: [
-      <>Manage VMI and replenishment across <strong>1,500+ SKUs</strong>, using SAP MM and Excel to review inventory positions, demand signals, and order requirements.</>,
-      <>Track inventory movements and purchase orders across SAP MM/SD and Manhattan WMS; investigate discrepancies and resolve warehouse and replenishment exceptions.</>,
-      <>Coordinate with <strong>20+ client, vendor, and internal stakeholders</strong> to resolve availability issues, order discrepancies, and fulfillment delays.</>,
-      <>Use SQL, Python, Power BI, and Excel to monitor <strong>15+ KPIs</strong>, surface operational gaps, and recommend corrective actions.</>,
-      <>Build Power BI dashboards and Python automations for recurring reporting; run what-if analysis on demand shifts, supplier delays, and inventory constraints.</>,
+    role: "Supply Chain Analyst",
+    company: "Advantage Solutions",
+    location: "United States",
+    period: "Jan 2025 — Present",
+    current: true,
+    description:
+      "Improving inventory visibility, replenishment decisions, and fulfillment performance through operational analytics.",
+    achievements: [
+      "Manage vendor-managed inventory and replenishment across 1,500+ SKUs using SAP MM and advanced Excel.",
+      "Track inventory movements, purchase orders, and fulfillment exceptions through SAP MM/SD and Manhattan WMS.",
+      "Coordinate with 20+ stakeholders to resolve supplier availability issues, inventory discrepancies, and fulfillment delays.",
+      "Analyze 15+ operational KPIs using SQL, Python, Power BI, and Excel to identify risks and improvement opportunities.",
+      "Develop automated reporting and conduct scenario analysis to support better replenishment decisions.",
     ],
-    tags: ['SAP', 'SQL', 'Python', 'Power BI', 'VMI'],
+    tools: ["SAP MM/SD", "SQL", "Python", "Power BI", "Excel"],
   },
   {
-    company: 'Flipkart', role: 'Supply Chain Analyst', location: 'India', dates: 'Jul 2021 — Jul 2023', current: false,
-    intro: 'Supported high-volume e-commerce planning, inventory health, and order fulfillment across a complex network.',
-    points: [
-      <>Analyzed demand, inventory, replenishment, and fulfillment across <strong>8,000+ SKUs</strong>, identifying stockout, overstock, and aging-inventory exceptions.</>,
-      <>Monitored <strong>25,000+ order lines per week</strong>, investigating order, dispatch, and inventory exceptions with warehouse and logistics teams.</>,
-      <>Built SQL and Excel analyses and Power BI dashboards for 10+ KPIs, including fill rate, inventory turnover, aging, and service levels.</>,
-      <>Partnered with <strong>30+ sellers and vendors</strong> to prioritize availability, dispatch, and replenishment escalations.</>,
-      <>Standardized recurring reports, exception reviews, and operating procedures, reducing manual reporting effort by <strong>20%</strong>.</>,
+    role: "Supply Chain Analyst",
+    company: "Flipkart",
+    location: "India",
+    period: "Jul 2021 — Jul 2023",
+    current: false,
+    description:
+      "Supported high-volume e-commerce inventory planning, demand analysis, and order fulfillment operations.",
+    achievements: [
+      "Analyzed inventory and replenishment trends across 8,000+ SKUs to identify stockout, overstock, and aging-inventory risks.",
+      "Monitored more than 25,000 order lines weekly and investigated fulfillment and dispatch exceptions.",
+      "Developed SQL, Excel, and Power BI reporting across 10+ supply chain performance indicators.",
+      "Collaborated with 30+ sellers and vendors to resolve availability and fulfillment issues.",
+      "Standardized reporting and operating procedures, reducing manual reporting effort by 20%.",
     ],
-    tags: ['SQL', 'Excel', 'Power BI', 'Forecasting', 'Fulfillment'],
+    tools: ["SQL", "Excel", "Power BI", "Forecasting", "Operations"],
   },
 ];
 
 const projects = [
   {
-    number: '01', title: 'Supplier Performance & Procurement Analytics', subtitle: 'Turning supplier data into clearer sourcing decisions.', tools: 'SQL · Excel · Power BI', icon: Truck,
-    metric: '$6M+', metricLabel: 'purchasing spend analyzed',
-    details: ['Evaluated 20,000+ purchase orders across 35 suppliers for lead-time variance, on-time delivery, defects, and price trends.', 'Created a weighted supplier scorecard, pinpointing the bottom 20% of suppliers behind 31% of late deliveries.', 'Built a procurement dashboard that highlighted 8% potential savings through price variance and category-spend analysis.'],
+    number: "01",
+    category: "PROCUREMENT INTELLIGENCE",
+    title: "Supplier Performance & Procurement Analytics",
+    description:
+      "A supplier intelligence solution designed to evaluate procurement performance, uncover delivery risks, and identify purchasing opportunities.",
+    tools: ["SQL", "Excel", "Power BI"],
+    highlights: [
+      "Analyzed 20,000+ purchase orders across 35 suppliers.",
+      "Identified the lowest-performing 20% of suppliers responsible for 31% of late deliveries.",
+      "Built procurement dashboards monitoring $6M+ in purchasing spend.",
+    ],
+    metric: "8%",
+    metricLabel: "Potential savings identified",
+    type: "supplier",
   },
   {
-    number: '02', title: 'Inventory Optimization & Demand Forecasting', subtitle: 'Forecast-led recommendations for healthier inventory.', tools: 'Python · SQL · Power BI', icon: Boxes,
-    metric: '87%', metricLabel: 'forecast accuracy achieved',
-    details: ['Analyzed two years of sales and inventory data for 500+ SKUs, identifying seasonal patterns, recurring stockouts, and $400K in slow-moving inventory.', 'Developed Python time-series forecasts and generated SKU-level safety-stock and reorder-point recommendations.', 'Designed a dashboard for turnover, days of supply, and availability, supporting recommendations projected to reduce stockout risk by 16%.'],
+    number: "02",
+    category: "PREDICTIVE ANALYTICS",
+    title: "Inventory Optimization & Demand Forecasting",
+    description:
+      "A forecasting and inventory optimization solution using historical demand patterns to improve stock planning and replenishment decisions.",
+    tools: ["Python", "SQL", "Power BI"],
+    highlights: [
+      "Analyzed two years of inventory and sales data across 500+ SKUs.",
+      "Identified $400K in slow-moving inventory.",
+      "Developed time-series forecasting models and SKU-level reorder recommendations.",
+    ],
+    metric: "87%",
+    metricLabel: "Forecast accuracy achieved",
+    type: "forecast",
   },
 ];
 
-function SectionLabel({ children, number }) {
-  return <div className="section-label"><span>{number}</span><span className="label-line" />{children}</div>;
+const skillGroups = [
+  {
+    icon: Boxes,
+    title: "Supply Chain & Planning",
+    skills: [
+      "Demand Forecasting",
+      "Inventory Optimization",
+      "Replenishment",
+      "Supply Planning",
+      "Procurement Planning",
+      "S&OP",
+      "Vendor Management",
+      "Order Fulfillment",
+    ],
+  },
+  {
+    icon: Database,
+    title: "Data Analytics & BI",
+    skills: [
+      "SQL",
+      "Power BI",
+      "Tableau",
+      "Advanced Excel",
+      "Power Query",
+      "KPI Dashboards",
+      "Data Visualization",
+      "Predictive Analytics",
+    ],
+  },
+  {
+    icon: Layers3,
+    title: "Programming & Systems",
+    skills: [
+      "Python",
+      "Pandas",
+      "NumPy",
+      "scikit-learn",
+      "SAP MM / SD / EWM",
+      "Manhattan WMS",
+      "TMS",
+      "Forecasting Models",
+    ],
+  },
+  {
+    icon: TrendingUp,
+    title: "Operational Excellence",
+    skills: [
+      "Lean",
+      "Kaizen",
+      "Root Cause Analysis",
+      "Process Improvement",
+      "SOP Development",
+      "Scenario Analysis",
+      "Stakeholder Management",
+      "Process Mapping",
+    ],
+  },
+];
+
+function SectionHeading({ number, label, title, description }) {
+  return (
+    <div className="section-heading">
+      <div>
+        <div className="section-kicker">
+          <span>{number}</span>
+          <span className="kicker-line" />
+          {label}
+        </div>
+        <h2>{title}</h2>
+      </div>
+      {description && <p>{description}</p>}
+    </div>
+  );
+}
+
+function AnalyticsVisual() {
+  const bars = [42, 55, 47, 68, 61, 78, 72, 91, 83, 100, 87, 96];
+
+  return (
+    <div className="analytics-visual">
+      <div className="visual-glow" />
+      <div className="dashboard-card">
+        <div className="dashboard-header">
+          <div>
+            <span className="dashboard-eyebrow">SUPPLY CHAIN INTELLIGENCE</span>
+            <h3>Operations overview</h3>
+          </div>
+          <span className="dashboard-status">
+            <span /> ANALYTICS
+          </span>
+        </div>
+
+        <div className="dashboard-stats">
+          <div>
+            <span>SKUs Managed</span>
+            <strong>1,500+</strong>
+          </div>
+          <div>
+            <span>KPIs Tracked</span>
+            <strong>15+</strong>
+          </div>
+        </div>
+
+        <div className="chart-heading">
+          <span>Operational performance</span>
+          <span>Illustrative trend</span>
+        </div>
+
+        <div className="chart-area">
+          <div className="chart-grid-lines">
+            <i /><i /><i /><i />
+          </div>
+          <div className="chart-bars">
+            {bars.map((height, index) => (
+              <div
+                key={index}
+                className="chart-bar"
+                style={{ height: `${height}%` }}
+              />
+            ))}
+          </div>
+        </div>
+
+        <div className="dashboard-bottom">
+          <span><span className="legend-dot" /> Performance trend</span>
+          <span>DATA → DECISIONS</span>
+        </div>
+      </div>
+
+      <div className="floating-insight insight-top">
+        <PackageCheck size={19} />
+        <div>
+          <strong>Inventory intelligence</strong>
+          <span>Smarter replenishment</span>
+        </div>
+      </div>
+
+      <div className="floating-insight insight-bottom">
+        <TrendingUp size={19} />
+        <div>
+          <strong>Data-driven planning</strong>
+          <span>Actionable insights</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ProjectVisual({ type }) {
+  if (type === "supplier") {
+    return (
+      <div className="project-visual supplier-visual">
+        <div className="visual-window">
+          <div className="window-top">
+            <span>SUPPLIER SCORECARD</span>
+            <span className="window-dots">● ● ●</span>
+          </div>
+          <div className="window-metrics">
+            <div><small>SUPPLIERS</small><strong>35</strong></div>
+            <div><small>POs ANALYZED</small><strong>20K+</strong></div>
+            <div><small>SPEND</small><strong>$6M+</strong></div>
+          </div>
+          <div className="supplier-bars">
+            {[70, 88, 62, 95, 76, 55, 84].map((height, index) => (
+              <div key={index}>
+                <span style={{ height: `${height}%` }} />
+              </div>
+            ))}
+          </div>
+          <div className="window-footer">
+            <span>Supplier performance analysis</span>
+            <BarChart3 size={15} />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="project-visual forecast-visual">
+      <div className="visual-window">
+        <div className="window-top">
+          <span>DEMAND FORECAST MODEL</span>
+          <span className="window-dots">● ● ●</span>
+        </div>
+        <div className="forecast-label">
+          <small>MODEL ACCURACY</small>
+          <strong>87%</strong>
+        </div>
+        <svg
+          viewBox="0 0 400 150"
+          className="forecast-chart"
+          role="img"
+          aria-label="Illustrative demand forecasting chart"
+        >
+          <defs>
+            <linearGradient id="forecastFill" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#b7efcf" stopOpacity=".35" />
+              <stop offset="100%" stopColor="#b7efcf" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+          {[30, 65, 100, 135].map(y => (
+            <line
+              key={y}
+              x1="0" x2="400" y1={y} y2={y}
+              stroke="#426052" strokeWidth=".7"
+            />
+          ))}
+          <path
+            d="M0 119 L40 103 L80 113 L120 77 L160 91 L200 60 L240 74 L280 42 L320 58 L360 22 L400 35 L400 150 L0 150 Z"
+            fill="url(#forecastFill)"
+          />
+          <path
+            d="M0 119 L40 103 L80 113 L120 77 L160 91 L200 60 L240 74 L280 42 L320 58 L360 22 L400 35"
+            fill="none" stroke="#b7efcf" strokeWidth="3"
+            strokeLinecap="round" strokeLinejoin="round"
+          />
+          <path
+            d="M0 115 L40 110 L80 102 L120 94 L160 86 L200 76 L240 68 L280 59 L320 48 L360 39 L400 27"
+            fill="none" stroke="#88b5fa" strokeWidth="2"
+            strokeDasharray="6 6"
+          />
+        </svg>
+        <div className="window-footer">
+          <span>Historical demand / Forecast</span>
+          <TrendingUp size={15} />
+        </div>
+      </div>
+    </div>
+  );
 }
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
+
+  useEffect(() => {
+    const sections = document.querySelectorAll("main section[id]");
+
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { rootMargin: "-25% 0px -60% 0px" }
+    );
+
+    sections.forEach(section => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
+
   const closeMenu = () => setMenuOpen(false);
 
   return (
     <div className="site-shell">
       <header className="topbar">
-        <a className="wordmark" href="#home" onClick={closeMenu} aria-label="Anuranjani Thota home"><span className="wordmark-mark">AT</span><span>ANURANJANI THOTA</span></a>
-        <button className="menu-toggle" aria-label={menuOpen ? 'Close menu' : 'Open menu'} onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X size={20} /> : <Menu size={20} />}</button>
-        <nav className={menuOpen ? 'navigation navigation-open' : 'navigation'}>
-          <a href="#about" onClick={closeMenu}>About</a><a href="#experience" onClick={closeMenu}>Experience</a><a href="#projects" onClick={closeMenu}>Projects</a><a href="#skills" onClick={closeMenu}>Expertise</a>
-          <a className="nav-contact" href="mailto:anuranjani2209@gmail.com" onClick={closeMenu}>Let's talk <ArrowUpRight size={14} /></a>
-        </nav>
+        <div className="nav-container">
+          <a className="brand" href="#home" onClick={closeMenu}>
+            <span className="brand-symbol">AT<span>.</span></span>
+            <span className="brand-name">ANURANJANI THOTA</span>
+          </a>
+
+          <nav className={`navigation ${menuOpen ? "navigation-open" : ""}`}>
+            {[
+              ["About", "about"],
+              ["Experience", "experience"],
+              ["Projects", "projects"],
+              ["Expertise", "skills"],
+              ["Education", "education"],
+            ].map(([label, id]) => (
+              <a
+                key={id}
+                href={`#${id}`}
+                onClick={closeMenu}
+                className={activeSection === id ? "nav-active" : ""}
+              >
+                {label}
+              </a>
+            ))}
+            <a href="#contact" className="nav-contact" onClick={closeMenu}>
+              Let's connect <ArrowUpRight size={15} />
+            </a>
+          </nav>
+
+          <button
+            className="menu-toggle"
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            {menuOpen ? <X size={23} /> : <Menu size={23} />}
+          </button>
+        </div>
       </header>
 
       <main>
         <section className="hero section-wrap" id="home">
           <div className="hero-copy">
-            <div className="eyebrow"><span className="status-dot" /> SUPPLY CHAIN ANALYST <span className="eyebrow-divider">/</span> DATA-LED OPERATIONS</div>
-            <h1>Better decisions.<br /><span>Stronger supply chains.</span></h1>
-            <p className="hero-lede">I turn complex supply chain data into practical plans—improving inventory health, fulfillment, and the way teams work.</p>
-            <div className="hero-actions"><a className="button button-dark" href="#experience">Explore my work <ArrowDown size={16} /></a><a className="text-link" href="mailto:anuranjani2209@gmail.com">Get in touch <ArrowUpRight size={15} /></a></div>
-            <div className="hero-meta"><span><MapPin size={14} /> United States</span><span className="meta-separator" /><a href="tel:+13305542728"><Phone size={13} /> +1 (330) 554-2728</a></div>
+            <div className="availability">
+              <span className="availability-dot" />
+              SUPPLY CHAIN ANALYTICS & OPERATIONS
+            </div>
+
+            <p className="hero-overline">HELLO, I'M ANURANJANI THOTA</p>
+
+            <h1>
+              Turning data into
+              <span className="gradient-text"> smarter supply chains.</span>
+            </h1>
+
+            <p className="hero-description">
+              Supply Chain Analyst specializing in inventory optimization,
+              demand forecasting, procurement analytics, and operational
+              excellence. I transform complex data into decisions that
+              make a measurable difference.
+            </p>
+
+            <div className="hero-actions">
+              <a href="#projects" className="btn btn-primary">
+                Explore my projects <ArrowUpRight size={17} />
+              </a>
+              <a href="#contact" className="btn btn-outline">
+                Get in touch <ArrowRight size={17} />
+              </a>
+            </div>
+
+            <div className="hero-social">
+              <span><MapPin size={15} /> United States</span>
+              <span className="social-divider" />
+              <a href={profile.github} target="_blank" rel="noreferrer">
+                <Github size={17} /> GitHub <ArrowUpRight size={12} />
+              </a>
+            </div>
           </div>
-          <div className="hero-art" aria-label="Supply chain analytics illustration">
-            <div className="art-topline"><span>OPERATIONS SNAPSHOT</span><span>01 / 04</span></div>
-            <div className="orbit orbit-one" /><div className="orbit orbit-two" />
-            <div className="art-center"><div className="center-icon"><PackageCheck size={30} strokeWidth={1.5} /></div><span>SUPPLY<br />IN MOTION</span></div>
-            <div className="art-node node-inventory"><span className="node-icon"><Boxes size={17} /></span><span>INVENTORY</span><b>1,500+ SKUs</b></div>
-            <div className="art-node node-insight"><span className="node-icon"><BarChart3 size={17} /></span><span>ANALYTICS</span><b>15+ KPIs</b></div>
-            <div className="art-node node-fulfillment"><span className="node-icon"><Truck size={17} /></span><span>FULFILLMENT</span><b>25K+ / wk</b></div>
-            <div className="art-footer"><span className="pulse-line" /> PLAN <ChevronRight size={12} /> ANALYZE <ChevronRight size={12} /> IMPROVE</div>
-            <span className="art-coordinate coord-one">40°36' N</span><span className="art-coordinate coord-two">DATA / 2025</span>
-          </div>
-          <a className="scroll-hint" href="#about"><span className="scroll-line" /> SCROLL TO EXPLORE</a>
+
+          <AnalyticsVisual />
+
+          <a href="#about" className="scroll-indicator">
+            <ArrowDown size={15} /> SCROLL TO EXPLORE
+          </a>
         </section>
 
-        <section className="intro-band" id="about">
-          <div className="section-wrap intro-grid">
-            <SectionLabel number="01">A LITTLE ABOUT ME</SectionLabel>
-            <div className="intro-content"><h2>Operational detail.<br /><span>Big-picture thinking.</span></h2><p>I'm a supply chain analyst with 3+ years of experience across e-commerce and business services. From demand signals to the final delivery, I connect the details across inventory, suppliers, and operations—and make the next best action clear.</p><div className="intro-facts"><div><strong>3+</strong><span>years in supply chain</span></div><div><strong>8K+</strong><span>SKUs analyzed</span></div><div><strong>25K+</strong><span>weekly order lines</span></div></div></div>
+        <section className="metrics-band">
+          <div className="section-wrap metrics-grid">
+            {metrics.map((metric, index) => (
+              <div className="metric-item" key={index}>
+                <strong>{metric.value}</strong>
+                <span>{metric.label}</span>
+              </div>
+            ))}
           </div>
         </section>
 
-        <section className="section-wrap experience-section" id="experience">
-          <SectionLabel number="02">CAREER JOURNEY</SectionLabel>
-          <div className="section-heading-row"><div><h2>Experience built<br /><span>on the details.</span></h2></div><p>Planning, analysis, and cross-functional execution—grounded in the realities of day-to-day operations.</p></div>
-          <div className="timeline">{experience.map((job, index) => <article className="job-card" key={job.company}><div className="timeline-marker"><span>{String(index + 1).padStart(2, '0')}</span><i /></div><div className="job-main"><div className="job-heading"><div><div className="job-title-line"><h3>{job.role}</h3>{job.current && <span className="current-badge"><span /> CURRENT</span>}</div><div className="company-line">{job.company} <span>·</span> {job.location}</div></div><time>{job.dates}</time></div><p className="job-intro">{job.intro}</p><ul className="achievement-list">{job.points.map((point, i) => <li key={i}><Check size={15} /> <span>{point}</span></li>)}</ul><div className="tag-row">{job.tags.map(tag => <span className="tag" key={tag}>{tag}</span>)}</div></div></article>)}</div>
+        <section className="section-wrap content-section about-section" id="about">
+          <SectionHeading
+            number="01"
+            label="ABOUT ME"
+            title={<>Where analytical thinking meets <em>operational impact.</em></>}
+            description="A combination of supply chain expertise and technical analytics to solve complex business challenges."
+          />
+
+          <div className="about-grid">
+            <div className="about-main">
+              <p className="about-lead">
+                I believe the best supply chain decisions start with
+                understanding the data behind them.
+              </p>
+              <p>
+                With 3+ years of experience across e-commerce and business
+                services, I work at the intersection of supply chain planning,
+                business intelligence, and operational execution.
+              </p>
+              <p>
+                From managing vendor-managed inventory to building analytical
+                dashboards and forecasting models, my focus is on translating
+                operational complexity into practical, measurable improvements.
+              </p>
+            </div>
+
+            <div className="about-focus">
+              <span className="small-heading">CORE FOCUS AREAS</span>
+              {[
+                "Inventory & Demand Planning",
+                "Supply Chain Analytics",
+                "Supplier & Procurement Performance",
+                "Business Intelligence & Reporting",
+              ].map((item, index) => (
+                <div className="focus-item" key={item}>
+                  <span>0{index + 1}</span>
+                  <strong>{item}</strong>
+                  <ArrowUpRight size={16} />
+                </div>
+              ))}
+            </div>
+          </div>
         </section>
 
-        <section className="projects-section" id="projects"><div className="section-wrap"><SectionLabel number="03">SELECTED PROJECTS</SectionLabel><div className="section-heading-row projects-heading"><div><h2>Analysis that moves<br /><span>work forward.</span></h2></div><p>Hands-on analytics projects connecting procurement and inventory data to actionable recommendations.</p></div><div className="project-grid">{projects.map(project => { const Icon = project.icon; return <article className="project-card" key={project.number}><div className="project-top"><span className="project-number">PROJECT / {project.number}</span><span className="project-icon"><Icon size={20} /></span></div><h3>{project.title}</h3><p className="project-subtitle">{project.subtitle}</p><div className="project-metric"><strong>{project.metric}</strong><span>{project.metricLabel}</span></div><ul>{project.details.map((detail, i) => <li key={i}><span className="bullet" />{detail}</li>)}</ul><div className="project-bottom"><span>{project.tools}</span><ArrowUpRight size={16} /></div></article>; })}</div></div></section>
+        <section className="experience-band" id="experience">
+          <div className="section-wrap content-section">
+            <SectionHeading
+              number="02"
+              label="PROFESSIONAL EXPERIENCE"
+              title={<>Experience built on <em>real-world impact.</em></>}
+              description="Combining operational knowledge, analytical tools, and cross-functional collaboration."
+            />
 
-        <section className="section-wrap skills-section" id="skills"><SectionLabel number="04">HOW I CREATE IMPACT</SectionLabel><div className="section-heading-row skills-heading"><div><h2>A toolkit for<br /><span>the whole picture.</span></h2></div><p>From planning frameworks to analytics tools, I bring the right mix of systems thinking and practical execution.</p></div><div className="skills-grid">{skills.map((group, i) => <article className="skill-card" key={group.title}><div className="skill-card-top"><span>0{i + 1}</span>{i === 0 ? <Settings2 /> : i === 1 ? <Database /> : <Factory />}</div><h3>{group.title}</h3><div className="skill-list">{group.items.map(item => <span key={item}>{item}</span>)}</div></article>)}</div></section>
+            <div className="experience-list">
+              {experience.map((job, index) => (
+                <article className="experience-card" key={job.company}>
+                  <div className="experience-side">
+                    <span className="experience-number">0{index + 1}</span>
+                    <span className="experience-period">{job.period}</span>
+                    {job.current && (
+                      <span className="current-pill">
+                        <span /> CURRENT ROLE
+                      </span>
+                    )}
+                  </div>
 
-        <section className="education-band"><div className="section-wrap education-grid"><SectionLabel number="05">EDUCATION & CREDENTIALS</SectionLabel><div className="education-content"><div className="education-main"><div className="education-icon"><GraduationCap size={23} /></div><div><span className="mono-label">AUG 2023 — MAY 2025</span><h3>Master of Science, Data Science</h3><p>Kent State University <span>·</span> Kent, Ohio</p><div className="gpa-pill">GPA <strong>3.68 / 4.0</strong></div></div></div><div className="certifications"><span className="mono-label">CERTIFICATIONS</span><div className="cert-list"><span><Sparkles size={14} /> APICS Certified Supply Chain Professional (CSCP)</span><span><Sparkles size={14} /> Lean Six Sigma Green Belt</span><span><Sparkles size={14} /> Microsoft Certified: Power BI Data Analyst Associate</span></div></div></div></div></section>
+                  <div className="experience-main">
+                    <div className="experience-header">
+                      <div>
+                        <h3>{job.role}</h3>
+                        <p>{job.company} <span>·</span> {job.location}</p>
+                      </div>
+                      <span className="experience-company-icon">
+                        <PackageCheck size={22} />
+                      </span>
+                    </div>
 
-        <section className="contact-section"><div className="section-wrap contact-wrap"><div><SectionLabel number="06">LET'S CONNECT</SectionLabel><h2>Ready to make<br /><span>the next move?</span></h2><p>Have a supply chain challenge or an opportunity to collaborate? I'd love to hear from you.</p><a className="button button-light" href="mailto:anuranjani2209@gmail.com">Start a conversation <ArrowUpRight size={16} /></a></div><div className="contact-card"><span className="contact-card-label">GET IN TOUCH</span><a href="mailto:anuranjani2209@gmail.com"><Mail size={18} /><span><small>EMAIL</small>anuranjani2209@gmail.com</span><ArrowUpRight size={15} /></a><a href="tel:+13305542728"><Phone size={18} /><span><small>PHONE</small>+1 (330) 554-2728</span><ArrowUpRight size={15} /></a><div className="contact-note"><span className="status-dot" /> OPEN TO MEANINGFUL CONVERSATIONS</div></div></div></section>
+                    <p className="experience-description">{job.description}</p>
+
+                    <ul className="achievement-list">
+                      {job.achievements.map((achievement, i) => (
+                        <li key={i}>
+                          <CheckCircle2 size={16} />
+                          <span>{achievement}</span>
+                        </li>
+                      ))}
+                    </ul>
+
+                    <div className="tag-list">
+                      {job.tools.map(tool => (
+                        <span key={tool}>{tool}</span>
+                      ))}
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="section-wrap content-section" id="projects">
+          <SectionHeading
+            number="03"
+            label="FEATURED PROJECTS"
+            title={<>Selected work. <em>Measurable results.</em></>}
+            description="Data-driven solutions focused on procurement performance, inventory health, and forecasting."
+          />
+
+          <div className="projects-grid">
+            {projects.map(project => (
+              <article className="project-card" key={project.number}>
+                <ProjectVisual type={project.type} />
+
+                <div className="project-content">
+                  <div className="project-topline">
+                    <span>PROJECT {project.number}</span>
+                    <span>{project.category}</span>
+                  </div>
+
+                  <h3>{project.title}</h3>
+                  <p className="project-description">{project.description}</p>
+
+                  <div className="project-result">
+                    <strong>{project.metric}</strong>
+                    <span>{project.metricLabel}</span>
+                  </div>
+
+                  <ul className="project-highlights">
+                    {project.highlights.map((highlight, i) => (
+                      <li key={i}>
+                        <ChevronRight size={15} />
+                        {highlight}
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="project-footer">
+                    <div className="tag-list">
+                      {project.tools.map(tool => (
+                        <span key={tool}>{tool}</span>
+                      ))}
+                    </div>
+                    <span className="project-arrow"><ArrowUpRight size={19} /></span>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="skills-band" id="skills">
+          <div className="section-wrap content-section">
+            <SectionHeading
+              number="04"
+              label="TECHNICAL EXPERTISE"
+              title={<>The tools behind <em>the decisions.</em></>}
+              description="A combination of analytics, enterprise systems, planning methods, and operational expertise."
+            />
+
+            <div className="skills-grid">
+              {skillGroups.map((group, index) => {
+                const Icon = group.icon;
+                return (
+                  <article className="skill-card" key={group.title}>
+                    <div className="skill-card-header">
+                      <span>0{index + 1} / EXPERTISE</span>
+                      <Icon size={23} />
+                    </div>
+                    <h3>{group.title}</h3>
+                    <div className="skill-tags">
+                      {group.skills.map(skill => (
+                        <span key={skill}>{skill}</span>
+                      ))}
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        <section className="section-wrap content-section" id="education">
+          <SectionHeading
+            number="05"
+            label="EDUCATION & CREDENTIALS"
+            title={<>Knowledge backed by <em>continuous learning.</em></>}
+          />
+
+          <div className="education-grid">
+            <div className="education-card">
+              <div className="education-icon"><GraduationCap size={26} /></div>
+              <span className="small-heading">ACADEMIC BACKGROUND</span>
+              <h3>Master of Science in Data Science</h3>
+              <p>Kent State University</p>
+              <span className="education-detail">Kent, Ohio · Aug 2023 – May 2025</span>
+              <div className="education-gpa">GPA <strong>3.68 / 4.0</strong></div>
+            </div>
+
+            <div className="education-card">
+              <div className="education-icon"><Sparkles size={26} /></div>
+              <span className="small-heading">PROFESSIONAL CERTIFICATIONS</span>
+              {[
+                "APICS Certified Supply Chain Professional (CSCP)",
+                "Lean Six Sigma Green Belt",
+                "Microsoft Certified: Power BI Data Analyst Associate",
+              ].map(cert => (
+                <div className="certification-item" key={cert}>
+                  <CheckCircle2 size={17} />
+                  <span>{cert}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="contact-section" id="contact">
+          <div className="section-wrap contact-inner">
+            <div>
+              <div className="section-kicker">
+                <span>06</span>
+                <span className="kicker-line" />
+                LET'S CONNECT
+              </div>
+              <h2>
+                Let's turn ideas into
+                <span className="gradient-text"> meaningful impact.</span>
+              </h2>
+              <p>
+                Interested in supply chain analytics, operational improvement,
+                or a new opportunity? I'd love to connect.
+              </p>
+              <a className="btn btn-primary" href={`mailto:${profile.email}`}>
+                Start a conversation <ArrowUpRight size={18} />
+              </a>
+            </div>
+
+            <div className="contact-links">
+              <a href={`mailto:${profile.email}`}>
+                <Mail size={22} />
+                <span><small>EMAIL</small>{profile.email}</span>
+                <ArrowUpRight size={18} />
+              </a>
+              <a href={`tel:${profile.phone.replace(/[^+\d]/g, "")}`}>
+                <Phone size={22} />
+                <span><small>PHONE</small>{profile.phone}</span>
+                <ArrowUpRight size={18} />
+              </a>
+              <a href={profile.github} target="_blank" rel="noreferrer">
+                <Github size={22} />
+                <span><small>GITHUB</small>View my GitHub profile</span>
+                <ArrowUpRight size={18} />
+              </a>
+            </div>
+          </div>
+        </section>
       </main>
-      <footer className="footer"><a className="wordmark" href="#home"><span className="wordmark-mark">AT</span><span>ANURANJANI THOTA</span></a><span>SUPPLY CHAIN ANALYST <i>·</i> DATA-DRIVEN DECISIONS</span><a className="back-top" href="#home">BACK TO TOP <ArrowUpRight size={13} /></a><span className="copyright">© {new Date().getFullYear()} ANURANJANI THOTA</span></footer>
+
+      <footer className="footer">
+        <div className="section-wrap footer-inner">
+          <a href="#home" className="footer-brand">AT<span>.</span></a>
+          <span>© {new Date().getFullYear()} Anuranjani Thota. All rights reserved.</span>
+          <a href="#home">Back to top ↑</a>
+        </div>
+      </footer>
     </div>
   );
 }
